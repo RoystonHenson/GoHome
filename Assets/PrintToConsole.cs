@@ -10,30 +10,37 @@ public class PrintToConsole : MonoBehaviour {
 	// Use this for initialization
 	void Start() {
 		distanceToHome = playerHome - playerLocation;
-		print("Welcome to \"Find Your Way Home!\"");
-		print("You have woken up after a crazy night out");
-		print("and now need to find your way home.");
-		print("Your location: " + playerLocation);
-		print("Distance to your home: " + distanceToHome.magnitude)
+		WelcomeMessage();
+		DisplayLocation();
 	}
 
 	// Update is called once per frame
 	void Update() {
-		checkPLayerLocation (KeyCode.UpArrow, new Vector2(1.0f, 0));
-		checkPLayerLocation (KeyCode.DownArrow, new Vector2(-1.0f, 0));
-		checkPLayerLocation (KeyCode.LeftArrow, new Vector2(0, -1.0f));
-		checkPLayerLocation (KeyCode.RightArrow, new Vector2(0, 1.0f));
+		CheckPLayerLocation(KeyCode.UpArrow, new Vector2(1.0f, 0));
+		CheckPLayerLocation(KeyCode.DownArrow, new Vector2(-1.0f, 0));
+		CheckPLayerLocation(KeyCode.LeftArrow, new Vector2(0, -1.0f));
+		CheckPLayerLocation(KeyCode.RightArrow, new Vector2(0, 1.0f));
 	}
 
-	void checkPLayerLocation(KeyCode kc, Vector2 movementVector) {
+	void CheckPLayerLocation(KeyCode kc, Vector2 movementVector) {
 		if(Input.GetKeyDown(kc)) {
 			playerLocation = playerLocation + movementVector;
-			print("Your location: " + playerLocation);
 			distanceToHome = playerHome - playerLocation;
-			print("Distance from your home: " + distanceToHome);
+			DisplayLocation();
 		}
 		if(playerLocation == playerHome) {
 		print("Congratulations!! You made it home!!");
 		}
+	}
+
+	void WelcomeMessage() {
+		print("Welcome to \"Find Your Way Home!\"");
+		print("You have woken up after a crazy night out");
+		print("and now need to find your way home.");
+	}
+
+	void DisplayLocation() {
+		print("Your location: " + playerLocation);
+		print("Distance from your home: " + distanceToHome.magnitude);
 	}
 }
